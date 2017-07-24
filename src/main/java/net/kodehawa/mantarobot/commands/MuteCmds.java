@@ -291,7 +291,6 @@ public class MuteCmds {
 
     @Subscribe
     public void onPostLoad(PostLoadEvent e){
-        System.out.println("Running mute stuff");
         muteExecutor.scheduleAtFixedRate(new MuteTask(), 0, 25, TimeUnit.SECONDS);
     }
 }

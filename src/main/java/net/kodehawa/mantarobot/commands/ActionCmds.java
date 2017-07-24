@@ -39,6 +39,7 @@ public class ActionCmds {
     private static final DataManager<List<String>> TSUNDERE = new SimpleFileDataManager("assets/mantaro/texts/tsundere.txt");
     private static final DataManager<List<String>> LEWD = new SimpleFileDataManager("assets/mantaro/texts/lewd.txt");
     private static final DataManager<List<String>> FACEDESK = new SimpleFileDataManager("assets/mantaro/texts/facedesk.txt");
+	private static final DataManager<List<String>> NUZZLE = new SimpleFileDataManager("assets/mantaro/texts/nuzzle.txt");
 
     @Subscribe
     public void action(CommandRegistry registry) {
@@ -208,11 +209,14 @@ public class ActionCmds {
                 EmoteReference.TALKING + "%s", GREETINGS.get()
         ));
 
-        //tsundere();
-        cr.register("tsundere", new TextActionCmd(
-                "Tsundere Command", "Y-You baka!", Color.PINK,
-                EmoteReference.MEGA + "%s", TSUNDERE.get()
-        ));
-    }
+		//tsundere();
+		cr.register("tsundere", new TextActionCmd(
+			"Tsundere Command", "Y-You baka!", Color.PINK,
+			EmoteReference.MEGA + "%s", TSUNDERE.get()
+		));
+	cr.register("nuzzle", new ImageActionCmd(
+		        "Nuzzle Command", "Nuzzles the specified user.", Color.PINK,
+                "nuzzle.gif", EmoteReference.TALKING + "%s is nuzzling %s", NUZZLE.get(), "*nuzzles you*", true
+        ));}
 
 }
