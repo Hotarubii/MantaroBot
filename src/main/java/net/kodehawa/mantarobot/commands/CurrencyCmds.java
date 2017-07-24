@@ -139,7 +139,7 @@ public class CurrencyCmds {
                                             .queue();
                                 }
 
-                                player.saveAsync();
+                                player.save();
                                 return;
                             }
 
@@ -289,7 +289,7 @@ public class CurrencyCmds {
                     }
 
                     u1.getData().setTimezone(args[1]);
-                    u1.saveAsync();
+                    u1.save();
                     event.getChannel().sendMessage(EmoteReference.CORRECT + "Saved timezone, your profile timezone is now: **" + args[1]
                             + "**").queue();
                     return;
@@ -318,14 +318,14 @@ public class CurrencyCmds {
                         player.setDescription(content1);
                         event.getChannel().sendMessage(EmoteReference.POPPER + "Set description to: **" + content1 + "**\n" +
                                 "Check your shiny new profile with `~>profile`").queue();
-                        player.saveAsync();
+                        player.save();
                         return;
                     }
 
                     if (args[1].equals("clear")) {
                         player.setDescription(null);
                         event.getChannel().sendMessage(EmoteReference.CORRECT + "Successfully cleared description.").queue();
-                        player.saveAsync();
+                        player.save();
                         return;
                     }
                 }
@@ -437,7 +437,7 @@ public class CurrencyCmds {
                 User mentioned = event.getMessage().getMentionedUsers().get(0);
                 UserData player = MantaroData.db().getUser(event.getGuild().getMember(mentioned));
                 player.addReputation(1L);
-                player.saveAsync();
+                player.save();
                 event.getChannel().sendMessage(EmoteReference.CORRECT + "Added reputation to **" + mentioned.getName() + "**").queue();
             }
 
@@ -503,8 +503,8 @@ public class CurrencyCmds {
                                 event.getChannel().sendMessage(EmoteReference.ERROR + "You don't have any of these items in your inventory")
                                         .queue();
                             }
-                            player.saveAsync();
-                            giveToPlayer.saveAsync();
+                            player.save();
+                            giveToPlayer.save();
                             return;
                         }
 
@@ -532,8 +532,8 @@ public class CurrencyCmds {
                         catch (NumberFormatException nfe) {
                             event.getChannel().sendMessage(EmoteReference.ERROR + "Invalid number provided").queue();
                         }
-                        player.saveAsync();
-                        giveToPlayer.saveAsync();
+                        player.save();
+                        giveToPlayer.save();
                     }
                 }
             }
@@ -615,8 +615,8 @@ public class CurrencyCmds {
                 }
                 if (toTransfer.addMoney(toSend)) {
                     transferPlayer.removeMoney(toSend);
-                    transferPlayer.save();
-                    toTransfer.save();
+                    transferPlayer.saveAsync();
+                    toTransfer.saveAsync();
 
                     if (user.getId().equals("224662505157427200")) {
                         MantaroBot.getInstance().getTextChannelById(329013929890283541L).

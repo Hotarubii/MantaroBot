@@ -314,7 +314,7 @@ public class MoneyCmds {
                         event.getChannel().sendMessage(EmoteReference.SAD + "Digging through messages, you found nothing but dust").queue();
                     }
                 }
-                player.save();
+                player.saveAsync();
             }
 
             @Override
