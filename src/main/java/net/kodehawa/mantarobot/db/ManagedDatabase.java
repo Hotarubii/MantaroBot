@@ -16,9 +16,9 @@ import java.util.List;
 import static com.rethinkdb.RethinkDB.r;
 
 public class ManagedDatabase {
-	public static final Config MANTARO_FACTORY = Snowflakes.config(1495900000L, 2L, 2L, 12L);
-    public static final Worker ID_WORKER = MANTARO_FACTORY.worker(0, 0), LOG_WORKER = MANTARO_FACTORY.worker(0, 2);private final Connection conn;
-
+    public static final Config MANTARO_FACTORY = Snowflakes.config(1495900000L, 2L, 2L, 12L);
+    public static final Worker ID_WORKER = MANTARO_FACTORY.worker(0, 0), LOG_WORKER = MANTARO_FACTORY.worker(0, 2);
+    private final Connection conn;
 
     public ManagedDatabase(Connection conn) {
         this.conn = conn;
@@ -66,13 +66,6 @@ public class ManagedDatabase {
         return guild == null ? new GuildData(guildId) : guild;
     }
 
-    public Marriage getMarriage(String user) {
-        return r.table(Marriage.DB_TABLE)
-            .getAll(user).optArg("index", "users")
-            .nth(0).default_(((Object) null))
-            .run(conn, Marriage.class);
-    }
-
     public GuildData getGuild(Guild guild) {
         return getGuild(guild.getId());
     }
@@ -88,6 +81,13 @@ public class ManagedDatabase {
     public MantaroObject getMantaroData() {
         MantaroObject obj = r.table(MantaroObject.DB_TABLE).get("mantaro").run(conn, MantaroObject.class);
         return obj == null ? new MantaroObject() : obj;
+    }
+
+    public Marriage getMarriage(String user) {
+        return r.table(Marriage.DB_TABLE)
+            .getAll(user).optArg("index", "users")
+            .nth(0).default_(((Object) null))
+            .run(conn, Marriage.class);
     }
 
     @Deprecated

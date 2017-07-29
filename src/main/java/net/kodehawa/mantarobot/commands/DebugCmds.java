@@ -59,6 +59,7 @@ public class DebugCmds {
                 String timeConnected;
 
                 HashMap save = o.next();
+                o.close();
 
                 HashMap process = (HashMap) save.get("process");
                 HashMap network = (HashMap) save.get("network");
